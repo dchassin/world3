@@ -101,9 +101,12 @@ def _(json, mo, scenario_name, set_changed):
     get_scenario,set_scenario = mo.state(None)
     def load_scenario(file="new.json"):
         if file is None: file = scenario_name.value
-        with open(file,"r") as fh:
-            set_scenario(json.load(fh))
-        set_changed("Loaded")
+        try:
+            with open(file,"r") as fh:
+                set_scenario(json.load(fh))
+            set_changed("Loaded")
+        except Exception as err:
+            set_changed(f"ERROR: {err}")
 
     def save_scenario(file=None):
         if file is None: file = scenario_name.value
@@ -339,7 +342,6 @@ def _(
         ]
     _columns = [x for x,y,z in _colors if y.value]
     _color = {x:z for x,y,z in _colors if y.value}
-    # _data = model[[x for x,y,z in _colors if y.value]]
     _data = model.scale(plot_scales.value)[[x for x,y,z in _colors if y.value]]
     _data.plot(
             grid=True,

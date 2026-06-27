@@ -24,6 +24,7 @@ def _(
     mo,
     model,
     plot,
+    pollution,
     references,
     save,
     scenario_file,
@@ -42,11 +43,11 @@ def _(
                 "Parameters": mo.ui.tabs(
                     {
                         "Fundamentals": fundamentals,
-                        "Population": None,
-                        "Resources": None,
+                        # "Population": None,
+                        # "Resources": None,
                         "Agriculture": agriculture,
                         "Capital": capital,
-                        "Pollution": None,
+                        "Pollution": pollution,
                     }
                 ),
                 "Results": mo.ui.tabs(
@@ -139,6 +140,7 @@ def _(json, mo, scenario_name, set_changed):
 @app.cell
 def _(
     World3,
+    ahl70,
     alai1,
     alai2,
     ali,
@@ -147,14 +149,18 @@ def _(
     alln,
     alsc1,
     alsc2,
+    amti,
     fioac1,
     fioac2,
+    frpm,
     fspd,
     ici,
     icor1,
     icor2,
     iet,
     ilf,
+    imef,
+    imti,
     io70,
     iopcd,
     lferti,
@@ -167,6 +173,12 @@ def _(
     pali,
     palt,
     pl,
+    ppgf1,
+    ppgf2,
+    ppol70,
+    ppoli,
+    pptd1,
+    pptd2,
     pyear,
     sci,
     scor1,
@@ -232,64 +244,24 @@ def _(
                 fioac2=fioac2.value,    
 
                 # pollution
-                # ppoli=ppoli.value * 1e6,
-                # ppol70=ppol70.value * 1e9,
-                # ahl70=ahl70.value,
-                # amti=amti.value,
-                # imti=imti.value,
-                # imef=imef.value,
-                # frpm=frpm.value,
-                # ppgf1=ppgf1.value,
-                # # ppgf1=ppgf1.value,
+                ppoli=ppoli.value * 1e6,
+                ppol70=ppol70.value * 1e9,
+                ahl70=ahl70.value,
+                amti=amti.value,
+                imti=imti.value,
+                imef=imef.value,
+                frpm=frpm.value,
+                ppgf1=ppgf1.value,
+                ppgf2=ppgf2.value,
                 # ppgf21=ppgf21.value,
-                # pptd1=pptd1.value,
-                # pptd2=pptd2.value,
-                # ppol=ppol.value,
-                # ppolx=ppolx.value,
-                # ppgao=ppgao.value,
-                # ppgio=ppgio.value,
-                # ppgf=ppgf.value,
-                # ppgr=ppgr.value,
-                # ppapr=ppapr.value,
-                # ppasr=ppasr.value,
-                # pptd=pptd.value,
-                # ahl=ahl.value,
-                # ahlm=ahlm.value,
+                pptd1=pptd1.value,
+                pptd2=pptd2.value,
             )
             set_changed("Ok")
         except Exception as err:
             set_changed(f"ERROR: {err}")
             # model.index = pd.DatetimeIndex([dt.date(int(x),int((x-int(x))*12)+1,1) for x in model.index])
     return (model,)
-
-
-@app.cell
-def _():
-    # pollution
-    # ppoli = slider("Initial persistent pollution [GT]",0,1000,10,"ppoli") 
-    # ppol70 = slider("Persistent pollution in {pyear.value:.0f}",0,1000,10,"ppol70")
-    # ahl70 = slider()
-    # amti = slider()
-    # imti = slider()
-    # imef = slider()
-    # frpm = slider()
-    # ppgf1 = slider()
-    # ppgf1 = slider()
-    # ppgf21 = slider()
-    # pptd1 = slider()
-    # pptd2 = slider()
-    # ppol = slider()
-    # ppolx = slider()
-    # ppgao = slider()
-    # ppgio = slider()
-    # ppgf = slider()
-    # ppgr = slider()
-    # ppapr = slider()
-    # ppasr = slider()
-    # pptd = slider()
-    # ahl = slider()
-    # ahlm = slider()
-    return
 
 
 @app.cell
@@ -460,7 +432,40 @@ def _(mo, pyear, slider):
     )
 
 
-@app.cell(hide_code=True)
+@app.cell
+def _(mo, pyear, slider):
+    # pollution
+    ppoli = slider("Initial persistent pollution [pollution units]",0,1e9,1e6,"ppoli") 
+    ppol70 = slider("Persistent pollution in 1970 [pollution units]",0,1e9,1e6,"ppol70")
+    ahl70 = slider("Assimilation half-life in 1970 [years]",0,2,0.1,"ahl70")
+    amti = slider("Agricultural materials toxicity index [pollution units/$]",0,2,0.1,"amti")
+    imti = slider("Industrial materials toxicity index [pollution units/resource unit]",0,100,0.1,"imti")
+    imef = slider("Industrial materials emission factor",0,0.5,0.001,"imef")
+    frpm = slider("Fraction of resources as persistent materials",0,0.1,0.001,"frpm")
+    ppgf1 = slider(f"Persistent pollution generation factor value before time={pyear.value:.0f}",0,2,0.1,"ppgf1")
+    ppgf2 = slider(f"Persistent pollution generation factor after time={pyear.value:.0f}",0,2,0.1,"ppgf2")
+    # ppgf21 = slider()
+    pptd1 = slider(f"Persistent pollution transmission delay before time={pyear.value:.0f} [years]",0,50,1,"pptd1")
+    pptd2 = slider(f"Persistent pollution transmission delay value after time={pyear.value:.0f} [years]",0,50,1,"pptd2")
+
+    pollution = mo.vstack([ppoli,ppol70,ahl70,amti,imti,imef,frpm,ppgf1,ppgf2,pptd1,pptd2])
+    return (
+        ahl70,
+        amti,
+        frpm,
+        imef,
+        imti,
+        pollution,
+        ppgf1,
+        ppgf2,
+        ppol70,
+        ppoli,
+        pptd1,
+        pptd2,
+    )
+
+
+@app.cell
 def _(mo):
     # references
     references=mo.md(r"""

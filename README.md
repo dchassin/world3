@@ -33,10 +33,8 @@ outputs
 References
 ----------
 
-1. Meadows, Donella H., Randers, Jorgen and Meadows, Dennis L.. "The Limits to
-Growth (1972)". The Future of Nature: Documents of Global Change, edited by
-Libby Robin, Sverker Sörlin and Paul Warde, New Haven: Yale University Press,
-2013, pp. 101-116. https://doi.org/10.12987/9780300188479-012
+1. [Meadows, Donella H., Randers, Jorgen and Meadows, Dennis L.. "The Limits to
+Growth (1972)".](https://www.donellameadows.org/wp-content/userfiles/Limits-to-Growth-digital-scan-version.pdf)
 
-2. Branderhorst, Gaya. 2020. Update to Limits to Growth: Comparing the World3
-Model With Empirical Data. Master's thesis, Harvard Extension School.
+2. [Branderhorst, Gaya. 2020. Update to Limits to Growth: Comparing the World3
+Model With Empirical Data. Master's thesis, Harvard Extension School.](https://dash.harvard.edu/server/api/core/bitstreams/c5a728c0-e735-4bcf-bee8-b80ca370dbaf/content)

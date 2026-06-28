@@ -1,7 +1,7 @@
 World3 Model
 ------------
 
-Based on Meadows [1] and Branderhorst [2].
+World3 model developed by Meadows [1], updated by Branderhorst [2], and implemented by Vanwynsberghe [3].
 
 Example
 -------
@@ -29,12 +29,24 @@ outputs
 
     [201 rows x 5 columns]
 
+Marimo Notebook
+---------------
 
+To run the model in a [Marimo notebook](https://docs.marimo.io) run the following script:
+
+    python3 -m venv .venv
+    . .venv/bin/activate
+    pip install --upgrade pip
+    pip install -r requirements.txt
+    marimo run world3/notebook.py
+    
 References
 ----------
 
-1. [Meadows, Donella H., Randers, Jorgen and Meadows, Dennis L.. "The Limits to
+1. [Meadows, Donella H., Randers, Jorgen and Meadows, Dennis L. "The Limits to
 Growth (1972)".](https://www.donellameadows.org/wp-content/userfiles/Limits-to-Growth-digital-scan-version.pdf)
 
 2. [Branderhorst, Gaya. 2020. Update to Limits to Growth: Comparing the World3
 Model With Empirical Data. Master's thesis, Harvard Extension School.](https://dash.harvard.edu/server/api/core/bitstreams/c5a728c0-e735-4bcf-bee8-b80ca370dbaf/content)
+
+3. [PyWorld3, GitHub (2021). Accessed May 12 2026.](https://github.com/cvanwynsberghe/pyworld3)

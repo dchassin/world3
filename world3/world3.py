@@ -59,7 +59,7 @@ class World3(pd.DataFrame):
         - `pyear`: policy start year
         - `verbose`: enable verbose output
         - `scales`: scaling of data
-        - `kwargs`: model constants
+        - `kwargs`: model parameters (see `pyworld3.World3`)
 
         Description
         -----------

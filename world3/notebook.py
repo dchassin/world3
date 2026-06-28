@@ -9,7 +9,7 @@ def _(mo):
     mo.md(r"""
     # World3 Model
 
-    This notebook implements the World3 model developed by Meadows [1], validated by Branderhorst [2], and implemented by Vanwynsberghe [3].
+    This notebook implements the World3 model developed by Meadows [1], updated by Branderhorst [2], and implemented by Vanwynsberghe [3].
     """)
     return
 
